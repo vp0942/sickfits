@@ -6,7 +6,7 @@ export default function MyApp({ Component, pageProps }) {
     <Page>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Component {...pageProps} />
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      {/* just a comment   */}
     </Page>
   );
 }
