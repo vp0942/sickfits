@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
     // takes the CSS from the styled components and
     // renders it out to the server
     const page = renderPage(
+      // eslint-disable-next-line react/jsx-props-no-spreading
       (App) => (props) => sheet.collectStyles(<App {...props} />)
     );
     // Gets the styled tags and gathers all of the CSS
