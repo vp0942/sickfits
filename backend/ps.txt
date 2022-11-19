@@ -1,5 +1,0 @@
-sick/t!4Mfrg9kCWZLZt
-
-mongodb+srv://sick:<password>@sickcluster.vdnjrgb.mongodb.net/test
-
-keystone: vp0942@gmail.com / linux pass
