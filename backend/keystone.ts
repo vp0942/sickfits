@@ -8,6 +8,7 @@ import {
 import { User } from './schemas/Users';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/Productimage';
+import { insertSeedData } from './seed-data';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -38,7 +39,13 @@ export default withAuth(
     db: {
       adapter: 'mongoose',
       url: databaseURL,
-      // TODO: Add data seeding here
+      async onConnect(keystone) {
+        // seeding the database with test items
+        console.log('Connected to database');
+        if (process.argv.includes('--seed-data')) {
+          await insertSeedData(keystone);
+        }
+      },
     },
     lists: createSchema({
       // Schema items go in here
@@ -48,12 +55,10 @@ export default withAuth(
     }),
     ui: {
       // Show the UI only for people who pass this test
-      isAccessAllowed: ({ session }) => {
-        console.log(session);
+      isAccessAllowed: ({ session }) =>
         // !! turns session into boolean as needed by typescript
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        return !!session?.data;
-      },
+        !!session?.data,
     },
     // Add session values here
     session: withItemData(statelessSessions(sessionConfig), {
