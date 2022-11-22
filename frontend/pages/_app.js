@@ -15,6 +15,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 // to stay above all components in the application
 // and be a communication layer between them and the server side
 function MyApp({ Component, pageProps, apollo }) {
+  // the apollo abject
   console.log(apollo);
   return (
     <ApolloProvider client={apollo}>
