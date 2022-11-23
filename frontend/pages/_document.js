@@ -2,6 +2,7 @@ import Document, { Html, Head, NextScript, Main } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
+  // Boilerplate
   // MOST OF IT TAKEN FROM THE "Styled Components" Docs !!!
   // https://styled-components.com/docs/advanced
   // Server Side Rendering -> ServerStyleSheet

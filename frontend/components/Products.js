@@ -27,6 +27,8 @@ const ProductsListStyles = styled.div`
 `;
 
 export default function Products() {
+  // useQuery is Apollo hook that connects the enables react components
+  // to fetch data from a database
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
   // the data from the server side (Keystone->MongoDB)
   console.log(data, error, loading);
