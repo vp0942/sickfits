@@ -1,22 +1,24 @@
 import { useState } from 'react';
 
 export default function useForm(initial = {}) {
-  // create a state object for our inputs
+  // create a state object for our inputs with useState hook
   const [inputs, setInputs] = useState(initial);
 
   // {
-  //   name: 'Wes',
-  //   description: 'nice shoes',
-  //   price: 1000
+  //   image:'',
+  //   name: 'Nice shoes',
+  //   price: 34234,
+  //   description: 'These are the best shoes!',
   // }
 
   function handleChange(e) {
-    console.log(e.target);
+    // console.log(e.target);
     let { value, name, type } = e.target;
     if (type === 'number') value = parseInt(value);
     // when working with files
     if (type === 'file') {
-      value[0] = e.target.files;
+      // take the firs item of the files array only
+      [value] = e.target.files;
     }
     setInputs({
       // copy the existing state
@@ -25,7 +27,7 @@ export default function useForm(initial = {}) {
     });
   }
 
-  console.log(inputs);
+  // console.log(inputs);
 
   function resetForm() {
     setInputs(initial);
