@@ -12,7 +12,7 @@ export default function useForm(initial = {}) {
   // }
 
   function handleChange(e) {
-    // console.log(e.target);
+    // console.dir(e.target);
     let { value, name, type } = e.target;
     if (type === 'number') value = parseInt(value);
     // when working with files
@@ -22,15 +22,15 @@ export default function useForm(initial = {}) {
     }
     setInputs({
       // copy the existing state
-      ...initial,
+      ...inputs,
       [name]: value,
     });
+    // console.log(inputs);
   }
-
-  // console.log(inputs);
 
   function resetForm() {
     setInputs(initial);
+    // console.log(inputs);
   }
 
   function clearForm() {
@@ -39,6 +39,7 @@ export default function useForm(initial = {}) {
       Object.entries(inputs).map(([key, value]) => [key, ''])
     );
     setInputs(blankState);
+    // console.log(inputs);
   }
 
   // return the things we want to surface it (expose it) from this custom hook !

@@ -1,5 +1,35 @@
+import { useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 import useForm from '../lib/useForm';
+import DisplayError from './ErrorMessage';
 import Form from './styles/Form';
+
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION(
+    # Which variables are getting passed in?
+    # And what types are they?
+    # ! means "Required"
+    $name: String!
+    $description: String!
+    $price: Int!
+    $image: Upload
+  ) {
+    createProduct(
+      data: {
+        name: $name
+        description: $description
+        price: $price
+        status: "AVAILABLE"
+        photo: { create: { image: $image, altText: $name } }
+      }
+    ) {
+      id
+      price
+      description
+      name
+    }
+  }
+`;
 
 export default function CreateProduct() {
   // curly brackets are used for objects, square ones for single variable
@@ -9,16 +39,38 @@ export default function CreateProduct() {
     price: 34234,
     description: 'These are the best shoes!',
   });
+  const [createProduct, { loading, error, data }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
+    { variables: inputs }
+  );
+  // console.dir(createProduct);
+
   return (
     <Form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        console.log(inputs);
+        //---------------------------------------
+        // const res = await createProduct({
+        //   // We can put the variables here  instaed
+        //   // of useMutation if we
+        //   // only know them at the time of Submision
+        //   variables: inputs,
+        // });
+        //---------------------------------------
+        // Submit the input fields to the backend:
+        const res = await createProduct();
+        console.log('res: ', res);
+        // equivalent to:
+        // await createProduct();
+        clearForm();
       }}
     >
+      {/* If error is false DisplayError component will not render:
+      refer to the code of ErrorMessage */}
+      <DisplayError error={error} />
       {/* the fieldset is used for grouped diabling of the form,
       Form cant be used in the same way */}
-      <fieldset>
+      <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="image">
           Image
           <input
@@ -47,7 +99,7 @@ export default function CreateProduct() {
             type="number"
             name="price"
             id="price"
-            placeholder="price"
+            placeholder="Price"
             value={inputs.price}
             onChange={handleChange}
           />

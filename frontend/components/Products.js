@@ -31,7 +31,7 @@ export default function Products() {
   // to fetch data from a database
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
   // the data from the server side (Keystone->MongoDB)
-  console.log(data, error, loading);
+  // console.log(data, error, loading);
   if (loading) {
     return <p>Loading...</p>;
   }
