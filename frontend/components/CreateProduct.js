@@ -1,7 +1,9 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
+import { ALL_PRODUCTS_QUERY } from './Products';
 import Form from './styles/Form';
 
 const CREATE_PRODUCT_MUTATION = gql`
@@ -41,7 +43,14 @@ export default function CreateProduct() {
   });
   const [createProduct, { loading, error, data }] = useMutation(
     CREATE_PRODUCT_MUTATION,
-    { variables: inputs }
+    {
+      // variables can be put here if known
+      // otherwise put them when calling the
+      // handler createProduct
+      variables: inputs,
+      // Update the products page
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
+    }
   );
   // console.dir(createProduct);
 
@@ -63,6 +72,10 @@ export default function CreateProduct() {
         // equivalent to:
         // await createProduct();
         clearForm();
+        // Go to that product's page
+        Router.push({
+          pathname: `/product/${res.data.createProduct.id}`,
+        });
       }}
     >
       {/* If error is false DisplayError component will not render:

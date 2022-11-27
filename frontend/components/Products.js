@@ -3,7 +3,10 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Product from './Product';
 
-const ALL_PRODUCTS_QUERY = gql`
+// The Query will be exportet too in order
+// to refetch it from CreateProduct's
+// useMutation hook
+export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY {
     allProducts {
       id
