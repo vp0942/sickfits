@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 // next.js understands the route /product/[id].js
 // and matches the template and pushes the [id]
 // or anything that comes after /product/....

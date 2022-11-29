@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
 import styled from 'styled-components';
@@ -33,11 +34,12 @@ const SINGLE_ITEM_QUERY = gql`
     }
   }
 `;
+
 export default function SingleProduct({ id }) {
   const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
     variables: { id },
   });
-  // console.log({ data, loading, error, id });
+  console.log({ data, loading, error, id });
   if (loading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
   const { Product } = data;

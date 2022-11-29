@@ -13,11 +13,29 @@ export default function Product({ product }) {
         alt={product?.name}
       />
       <Title>
+        {/* ex.: http://localhost:7777/product/637a49364e348f2a88edf7a7
+        works with product/[id].js, next.js injects query param query:{id:...}
+        in the page component SingleProductPage */}
         <Link href={`/product/${product.id}`}>{product.name}</Link>
       </Title>
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
-      {/* TODO: Add buttons to edit and delete items. */}
+      {/* Add buttons to edit and delete items. */}
+      <div className="buttonList">
+        <Link
+          href={{
+            pathname: 'update',
+            query: {
+              // ex.: http://localhost:7777/update?id=637a49364e348f2a88edf7a7
+              // works with update.js, next.js injects query param query:{id:...}
+              // in the page component UpdatePage
+              id: product.id,
+            },
+          }}
+        >
+          Edit 📝
+        </Link>
+      </div>
     </ItemStyles>
   );
 }
