@@ -1,8 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useForm(initial = {}) {
   // create a state object for our inputs with useState hook
   const [inputs, setInputs] = useState(initial);
+
+  // We need something to watch for change in initial = {}
+  // initial itself will lead to infinite loop so we will
+  // create another variable - initialValues from it.
+
+  const initialValues = Object.values(initial).join('');
+
+  // To solve the bug with empty edit form we'll use useEffect.
+  // useEffect will watch initialValues and when
+  // it changes from undefined to some string will run
+  // the handler setInputs(initial) to update the state
+  // immediately after initial is received.
+  useEffect(() => {
+    // This function runs when the things we are watching change
+    setInputs(initial);
+  }, [initialValues]);
 
   // {
   //   image:'',

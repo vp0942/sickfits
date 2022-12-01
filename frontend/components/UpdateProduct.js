@@ -57,6 +57,8 @@ export default function UpdateProduct({ id }) {
       // will be done on call of onSubmit this time
       // Refer to CreateProduct for declaration
       // in the body of useMutation hook
+      // Even you can remove variables:{} completely
+      // from here
     },
   });
   // 2.5 Create some state for the form inputs -> pass "data" from the our query
