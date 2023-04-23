@@ -4,6 +4,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 import { endpoint, prodEndpoint } from '../config';
+import paginationField from './paginationField';
 
 // Boilerplate
 function createClient({ headers, initialState }) {
@@ -37,7 +38,9 @@ function createClient({ headers, initialState }) {
         Query: {
           fields: {
             // TODO: We will add this together!
-            // allProducts: paginationField(),
+            // We say to Apollo that we will handle how the
+            // query results will be represented in the cash
+            allProducts: paginationField(),
           },
         },
       },
