@@ -8,6 +8,7 @@ import {
 import { User } from './schemas/Users';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/Productimage';
+import { CartItem } from './schemas/CartItem';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
 
@@ -66,6 +67,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     ui: {
       // Show the UI only for people who pass this test
