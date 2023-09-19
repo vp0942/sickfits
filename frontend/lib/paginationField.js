@@ -4,12 +4,12 @@ export default function paginationField() {
   return {
     keyArgs: false, // tellsapollo we will take care of everything
     read(existing = [], { args, cache }) {
-      console.log({ existing, args, cache });
+      // console.log({ existing, args, cache });
       const { skip, first } = args;
 
       // Read the number of items on the page from the cash
       const data = cache.readQuery({ query: PAGINATION_QUERY });
-      console.log(data);
+      // console.log(data);
       const count = data?._allProductsMeta?.count;
       const page = skip / first + 1;
       const pages = Math.ceil(count / first);
@@ -32,9 +32,9 @@ export default function paginationField() {
 
       // If there are items, return them from the cash and we don't need to go to the network.
       if (items.length) {
-        console.log(
-          `There are ${items.length} items in the cash. Gonna send them to Apollo.`
-        );
+        // console.log(
+        //   `There are ${items.length} items in the cash. Gonna send them to Apollo.`
+        // );
         return items;
       }
 
@@ -59,14 +59,14 @@ export default function paginationField() {
       // This runs when the Apollo client
       // comes back from the network with
       // our products.
-      console.log(`Merging items from the network ${incoming.length}`);
-      console.log(incoming);
+      // console.log(`Merging items from the network ${incoming.length}`);
+      // console.log(incoming);
       const merged = existing ? existing.slice() : []; // if there are existing items in the cash take them
       // eslint-disable-next-line no-plusplus
       for (let i = skip; i < skip + incoming.length; ++i) {
         merged[i] = incoming[i - skip];
       }
-      console.log(merged);
+      // console.log(merged);
       // Finally we returned the merged items from the cache.
       return merged; // Now Apollo will execute the read() function again
     },
