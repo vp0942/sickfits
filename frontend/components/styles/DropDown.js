@@ -34,6 +34,7 @@ const glow = keyframes`
 
 const SearchStyles = styled.div`
   position: relative;
+  width: 100vw; // 100% of the viewport width
   input {
     width: 100%;
     padding: 10px;
