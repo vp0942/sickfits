@@ -5,13 +5,15 @@ import {
   withItemData,
   statelessSessions,
 } from '@keystone-next/keystone/session';
-import { User } from './schemas/Users';
+import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/Productimage';
 import { CartItem } from './schemas/CartItem';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
 import { extendGraphqlSchema } from './mutations';
+import { OrderItem } from './schemas/OrderItem';
+import { Order } from './schemas/Order';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -69,6 +71,8 @@ export default withAuth(
       Product,
       ProductImage,
       CartItem,
+      OrderItem,
+      Order,
     }),
     extendGraphqlSchema,
     ui: {
