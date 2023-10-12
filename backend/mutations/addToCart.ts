@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { KeystoneContext, SessionStore } from '@keystone-next/types';
+import { KeystoneContext } from '@keystone-next/types';
 import { CartItemCreateInput } from '../.keystone/schema-types';
 import { Session } from '../types';
 

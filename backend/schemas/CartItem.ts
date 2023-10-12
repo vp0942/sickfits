@@ -1,7 +1,7 @@
 import { integer, relationship, select, text } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 
-// Named export used to make outoimports work a bit nicer
+// Named export used to make autoimports work a bit nicer
 export const CartItem = list({
   // access:
   ui: {
