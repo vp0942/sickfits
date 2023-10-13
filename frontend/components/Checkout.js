@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import {
   CardElement,
   Elements,
@@ -9,7 +10,10 @@ import { useState } from 'react';
 import nProgress from 'nprogress';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 import SickButton from './styles/SickButton';
+import { useCart } from '../lib/cartState';
+import { CURRENT_USER_QUERY } from './User';
 
 const { default: styled } = require('styled-components');
 
@@ -43,8 +47,13 @@ function CheckoutForm() {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
+  const cloesCart = useCart();
   const [checkout, { error: graphQLError }] = useMutation(
-    CREATE_ORDER_MUTATION
+    CREATE_ORDER_MUTATION,
+    {
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    } // refetchQueries will refetch the CURRENT_USER_QUERY after the mutation is done
   ); // the {variable} argument is still unknown, so we will pass it not at definition time but later at run time
 
   async function handleSubmit(e) {
@@ -75,6 +84,10 @@ function CheckoutForm() {
     console.log('Finished with the order!');
     console.log(order);
     // 6. Change the page to view the order
+    router.push({
+      pathname: '/order/[id]',
+      query: { id: order.data.checkout.id },
+    });
     // 7. Close the cart
     // 8. Turn the loader off
     setLoading(false);
@@ -90,7 +103,6 @@ function CheckoutForm() {
     </CheckoutFormStyles>
   );
 }
-
 function Checkout() {
   return (
     <Elements stripe={stripeLib}>
