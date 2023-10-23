@@ -48,7 +48,7 @@ function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
-  const cloesCart = useCart();
+  const closeCart = useCart();
   const [checkout, { error: graphQLError }] = useMutation(
     CREATE_ORDER_MUTATION,
     {
@@ -89,10 +89,12 @@ function CheckoutForm() {
       query: { id: order.data.checkout.id },
     });
     // 7. Close the cart
+    closeCart();
     // 8. Turn the loader off
     setLoading(false);
     nProgress.done();
   }
+
   return (
     // eslint-disable-next-line react/jsx-no-bind
     <CheckoutFormStyles onSubmit={handleSubmit}>
@@ -103,6 +105,7 @@ function CheckoutForm() {
     </CheckoutFormStyles>
   );
 }
+
 function Checkout() {
   return (
     <Elements stripe={stripeLib}>

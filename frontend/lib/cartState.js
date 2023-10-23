@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
 const LocalStateContext = createContext();
-const LocalStatePrvider = LocalStateContext.Provider;
+const LocalStateProvider = LocalStateContext.Provider;
 
 // eslint-disable-next-line react/prop-types
 function CartStateProvider({ children }) {
@@ -10,7 +10,7 @@ function CartStateProvider({ children }) {
   // It must be imported on very high level in the project (like _app.js)
   // in order to be visible from all components below it!
 
-  // clesed cart by default
+  // closed cart by default
   const [cartOpen, setCartOpen] = useState(false);
 
   function toggleCart() {
@@ -25,7 +25,7 @@ function CartStateProvider({ children }) {
     setCartOpen(true);
   }
   return (
-    <LocalStatePrvider
+    <LocalStateProvider
       value={{
         cartOpen,
         setCartOpen,
@@ -35,7 +35,7 @@ function CartStateProvider({ children }) {
       }}
     >
       {children}
-    </LocalStatePrvider>
+    </LocalStateProvider>
   );
 }
 

@@ -2,7 +2,7 @@ import { PAGINATION_QUERY } from '../components/Pagination';
 
 export default function paginationField() {
   return {
-    keyArgs: false, // tellsapollo we will take care of everything
+    keyArgs: false, // tells apollo we will take care of everything
     read(existing = [], { args, cache }) {
       // console.log({ existing, args, cache });
       const { skip, first } = args;
@@ -30,7 +30,7 @@ export default function paginationField() {
         return false; // go to network
       }
 
-      // If there are items, return them from the cash and we don't need to go to the network.
+      // If there are items, return them from the cash, and we don't need to go to the network.
       if (items.length) {
         // console.log(
         //   `There are ${items.length} items in the cash. Gonna send them to Apollo.`
