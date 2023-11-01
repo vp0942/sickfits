@@ -1,9 +1,15 @@
 import { integer, relationship, select, text } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
+import { isSignedIn, rules } from '../access';
 
-// Named export used to make autoimports work a bit nicer
+// Named export used to make auto imports work a bit nicer
 export const CartItem = list({
-  // access:
+  access: {
+    create: isSignedIn,
+    read: rules.canOrder,
+    update: rules.canOrder,
+    delete: rules.canOrder,
+  },
   ui: {
     listView: {
       initialColumns: ['product', 'quantity', 'user'],

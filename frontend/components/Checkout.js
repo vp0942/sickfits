@@ -48,13 +48,15 @@ function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
-  const closeCart = useCart();
+  const {closeCart} = useCart();
   const [checkout, { error: graphQLError }] = useMutation(
     CREATE_ORDER_MUTATION,
     {
       refetchQueries: [{ query: CURRENT_USER_QUERY }],
     } // refetchQueries will refetch the CURRENT_USER_QUERY after the mutation is done
   ); // the {variable} argument is still unknown, so we will pass it not at definition time but later at run time
+    // during the handleSubmit function call when we will have the token from stripe and we will pass it as a variable
+  // to the mutation resolver - checkout(token: $token)
 
   async function handleSubmit(e) {
     // 1. Stop the form from submitting and turn the loader on

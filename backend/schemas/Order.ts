@@ -7,9 +7,16 @@ import {
 } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 import formatMoney from '../lib/formatMoney';
+import { isSignedIn, rules } from '../access';
 
-// Named export used to make outoimports work a bit nicer
+// Named export used to make auto imports work a bit nicer
 export const Order = list({
+  access: {
+    create: isSignedIn,
+    read: rules.canOrder,
+    update: () => false,
+    delete: () => false,
+  },
   fields: {
     label: virtual({
       graphQLReturnType: 'String',
