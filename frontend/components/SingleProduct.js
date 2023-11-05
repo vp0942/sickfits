@@ -44,7 +44,8 @@ export default function SingleProduct({ id }) {
   if (error) return <DisplayError error={error} />;
   const { Product } = data;
   return (
-    <ProductStyles>
+    // Here data-testid is used to test the component
+    <ProductStyles data-testid = 'singleProduct'>
       {/* modify the title of the page */}
       <Head>
         <title>Sick Fits | {Product.name}</title>
@@ -60,3 +61,5 @@ export default function SingleProduct({ id }) {
     </ProductStyles>
   );
 }
+
+export { SINGLE_ITEM_QUERY };
