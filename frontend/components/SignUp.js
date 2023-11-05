@@ -51,8 +51,7 @@ export default function SignUp() {
       <fieldset>
         {data?.createUser && (
           <p>
-            Signed up with {data.createUser.email} - Please Go Ahead and Sign
-            in!
+            Signed up with {data.createUser.email} - Please Go Ahead and Sign in!
           </p>
         )}
         <label htmlFor="name">
@@ -93,3 +92,5 @@ export default function SignUp() {
     </Form>
   );
 }
+
+export { SIGNUP_MUTATION };
