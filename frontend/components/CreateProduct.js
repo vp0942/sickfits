@@ -37,9 +37,9 @@ export default function CreateProduct() {
   // curly brackets are used for objects, square ones for single variable
   const { inputs, handleChange, resetForm, clearForm } = useForm({
     image: '',
-    name: 'Nice shoes',
-    price: 34234,
-    description: 'These are the best shoes!',
+    name: '',
+    price: 0,
+    description: '',
   });
   const [createProduct, { loading, error, data }] = useMutation(
     CREATE_PRODUCT_MUTATION,
@@ -138,3 +138,5 @@ export default function CreateProduct() {
     </Form>
   );
 }
+
+export { CREATE_PRODUCT_MUTATION };
